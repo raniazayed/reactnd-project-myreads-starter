@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types'; 
 
 const Book = (props) => {
-
+  const {book} = props;
     Book.propTypes = {
         book: PropTypes.object.isRequired,
         onBookStatusChange: PropTypes.func.isRequired,
     }
 
-  const bookShelfStatus = props.book && props.book.shelf ? props.book.shelf : "none";
+  const bookShelfStatus = book && book.shelf ? book.shelf : "none";
   const [bookStatus, setBookStatus] = useState(bookShelfStatus);
 
   const shelfStatuses = [
@@ -19,7 +19,7 @@ const Book = (props) => {
   ];
   const onChangeBookStatus = (e) => {
     setBookStatus(e.target.value);
-    props.onBookStatusChange(props.book, e.target.value);
+    props.onBookStatusChange(book, e.target.value);
   };
   return (
     <div className="book">
@@ -29,7 +29,7 @@ const Book = (props) => {
           style={{
             width: 128,
             height: 188,
-            backgroundImage: `url(${props.book.imageLinks.thumbnail})`,
+            backgroundImage: `url(${book.imageLinks ? book.imageLinks.thumbnail : ''})`,
           }}
         ></div>
         <div className="book-shelf-changer">
@@ -47,10 +47,10 @@ const Book = (props) => {
           </select>
         </div>
       </div>
-      <div className="book-title">{props.book.title}</div>
+      <div className="book-title">{book.title}</div>
 
       <div className="book-authors">
-            {props.book && props.book.authors && props.book.authors.map((author, index) => {
+            {book && book.authors && book.authors.map((author, index) => {
                 return <span key={index}>{author} <br/></span> 
             })}
         </div>

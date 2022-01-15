@@ -14,7 +14,7 @@ const BookSearchResults = (props) => {
 
     const bookStatusChange = (book, bookStatus) => {
         BooksAPI.update(book, bookStatus).then((res) => {
-            shelfChanged();
+            shelfChanged(book, bookStatus);
         });
     };
 

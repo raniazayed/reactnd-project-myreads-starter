@@ -18,8 +18,19 @@ const App = () => {
       setBooks(books);
     });
   };
-  const shelfChanged = () => {
-    getAllBooks();
+  const shelfChanged = (book, bookStatus) => {
+    // I only call all books implementation as sometimes the backend team the one who made the calculations not front 
+    // getAllBooks();
+    const updatedBookId = books.findIndex((b)=>  b.id === book.id);
+    const newBooks = [...books];
+   
+    if(updatedBookId > -1) newBooks[updatedBookId].shelf = bookStatus;
+    else {
+      // in case of none shelfed book coming from library
+      book.shelf = bookStatus;
+      newBooks.push(book)
+    } 
+    setBooks(newBooks);
   };
 
   return (

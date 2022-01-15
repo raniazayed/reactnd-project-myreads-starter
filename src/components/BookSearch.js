@@ -47,8 +47,8 @@ const BookSearch = (props) => {
       setSearchBookResults([])});
   }
 
-  const shelfChanged = () => {
-    props.shelfChanged()
+  const shelfChanged = (book,bookStatus) => {
+    props.shelfChanged(book,bookStatus)
   }
   return (
     <div className="search-books">
